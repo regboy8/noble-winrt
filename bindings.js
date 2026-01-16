@@ -8,7 +8,7 @@ const events = require('events');
 const debug = require('debug')('noble-winrt');
 const path = require('path');
 
-const BLE_SERVER_EXE = path.resolve(__dirname, 'prebuilt', 'BLEServer.exe');
+let BLE_SERVER_EXE = path.resolve(__dirname, 'prebuilt', 'BLEServer.exe');
 /**
  * ****Fix for Electron Production****
  * When the app is packaged, files inside 'app.asar' cannot be executed directly by 'child_process.spawn'.
