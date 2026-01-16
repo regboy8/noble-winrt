@@ -161,7 +161,7 @@ class WinrtBindings extends events.EventEmitter {
                     txPowerLevel: 0,
                     // Set manufacturerData from message. If null in previous versions, 
                     // ensuring it's captured here to allow device identification.
-                    manufacturerData: message.manufacturerData ? Buffer.from(message.manufacturerData) : null,
+                    manufacturerData: message.manufacturerData,
                     serviceUuids: message.serviceUuids.map(fromWindowsUuid),
                     serviceData: [],
                 };
