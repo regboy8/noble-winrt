@@ -9,7 +9,16 @@ const debug = require('debug')('noble-winrt');
 const path = require('path');
 
 const BLE_SERVER_EXE = path.resolve(__dirname, 'prebuilt', 'BLEServer.exe');
-
+/**
+ * ****Fix for Electron Production****
+ * When the app is packaged, files inside 'app.asar' cannot be executed directly by 'child_process.spawn'.
+ * We must use the 'asarUnpack' feature in electron-builder, which extracts the binary to 'app.asar.unpacked'.
+ * The following line redirects the path to the physical file on the disk to ensure it can be executed.
+ */
+const { app } = require('electron');
+if (app.isPackaged) {
+    BLE_SERVER_EXE = BLE_SERVER_EXE.replace('app.asar', 'app.asar.unpacked');
+}
 function toWindowsUuid(uuid) {
     return '{' + uuid + '}';
 }
