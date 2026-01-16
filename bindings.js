@@ -159,7 +159,9 @@ class WinrtBindings extends events.EventEmitter {
                 let advertisement = {
                     localName: message.localName,
                     txPowerLevel: 0,
-                    manufacturerData: null,
+                    // Set manufacturerData from message. If null in previous versions, 
+                    // ensuring it's captured here to allow device identification.
+                    manufacturerData: message.manufacturerData ? Buffer.from(message.manufacturerData) : null,
                     serviceUuids: message.serviceUuids.map(fromWindowsUuid),
                     serviceData: [],
                 };
